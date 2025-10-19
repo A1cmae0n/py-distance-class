@@ -17,9 +17,10 @@ class Distance:
         return Distance(distance1 + distance2)
 
     def __iadd__(self, other: Distance | int | float) -> Distance:
-        distance1 = self.km
-        distance2 = other.km if isinstance(other, Distance) else other
-        self.km = distance1 + distance2
+        if isinstance(other, Distance):
+            self.km += other.km
+        elif isinstance(other, int | float):
+            self.km += other
         return self
 
     def __mul__(self, other: Distance | int | float) -> Distance:
@@ -29,30 +30,33 @@ class Distance:
 
     def __truediv__(self, other: Distance | int | float) -> Distance:
         distance1 = self.km
-        distance2 = other
-        return Distance(round((distance1 / distance2), 2))
+        distance2 = other.km if isinstance(other, Distance) else other
+        if isinstance(other, Distance):
+            return None
+        elif isinstance(other, int | float):
+            return Distance(round((distance1 / distance2), 2))
 
     def __lt__(self, other: Distance | int | float) -> bool:
         distance1 = self.km
-        distance2 = other
+        distance2 = other.km if isinstance(other, Distance) else other
         return distance1 < distance2
 
     def __gt__(self, other: Distance | int | float) -> bool:
         distance1 = self.km
-        distance2 = other
+        distance2 = other.km if isinstance(other, Distance) else other
         return distance1 > distance2
 
     def __eq__(self, other: Distance | int | float) -> bool:
         distance1 = self.km
-        distance2 = other
+        distance2 = other.km if isinstance(other, Distance) else other
         return distance1 == distance2
 
     def __le__(self, other: Distance | int | float) -> bool:
         distance1 = self.km
-        distance2 = other
+        distance2 = other.km if isinstance(other, Distance) else other
         return distance1 <= distance2
 
     def __ge__(self, other: Distance | int | float) -> bool:
         distance1 = self.km
-        distance2 = other
+        distance2 = other.km if isinstance(other, Distance) else other
         return distance1 >= distance2
