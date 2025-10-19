@@ -1,58 +1,58 @@
+from __future__ import annotations
+
+
 class Distance:
-    def __init__(self, distance: int) -> None:
-        self.distance = distance
-        self.km = distance
-        return
+    def __init__(self, km: int) -> None:
+        self.km = km
 
     def __str__(self) -> str:
-        return f"Distance: {self.distance} kilometers."
+        return f"Distance: {self.km} kilometers."
 
     def __repr__(self) -> str:
-        return f"Distance(km={self.distance})"
+        return f"Distance(km={self.km})"
 
-    def __add__(*argc) -> "Distance":
-        distance1 = argc[0].km if isinstance(argc[0], Distance) else argc[0]
-        distance2 = argc[1].km if isinstance(argc[1], Distance) else argc[1]
+    def __add__(self, other: Distance | int | float) -> Distance:
+        distance1 = self.km
+        distance2 = other.km if isinstance(other, Distance) else other
         return Distance(distance1 + distance2)
 
-    def __iadd__(*argc) -> "Distance":
-        distance1 = argc[0].km if isinstance(argc[0], Distance) else argc[0]
-        distance2 = argc[1].km if isinstance(argc[1], Distance) else argc[1]
-        argc[0].distance = distance1 + distance2
-        argc[0].km = distance1 + distance2
-        return argc[0]
+    def __iadd__(self, other: Distance | int | float) -> Distance:
+        distance1 = self.km
+        distance2 = other.km if isinstance(other, Distance) else other
+        self.km = distance1 + distance2
+        return self
 
-    def __mul__(*argc) -> "Distance":
-        distance1 = argc[0].km if isinstance(argc[0], Distance) else argc[0]
-        distance2 = argc[1]
+    def __mul__(self, other: Distance | int | float) -> Distance:
+        distance1 = self.km
+        distance2 = other
         return Distance(distance1 * distance2)
 
-    def __truediv__(*argc) -> "Distance":
-        distance1 = argc[0].distance
-        distance2 = argc[1]
+    def __truediv__(self, other: Distance | int | float) -> Distance:
+        distance1 = self.km
+        distance2 = other
         return Distance(round((distance1 / distance2), 2))
 
-    def __lt__(*argc) -> bool:
-        distance1 = argc[0].km if isinstance(argc[0], Distance) else argc[0]
-        distance2 = argc[1].km if isinstance(argc[1], Distance) else argc[1]
+    def __lt__(self, other: Distance | int | float) -> bool:
+        distance1 = self.km
+        distance2 = other
         return distance1 < distance2
 
-    def __gt__(*argc) -> bool:
-        distance1 = argc[0].km if isinstance(argc[0], Distance) else argc[0]
-        distance2 = argc[1].km if isinstance(argc[1], Distance) else argc[1]
+    def __gt__(self, other: Distance | int | float) -> bool:
+        distance1 = self.km
+        distance2 = other
         return distance1 > distance2
 
-    def __eq__(*argc) -> bool:
-        distance1 = argc[0].km if isinstance(argc[0], Distance) else argc[0]
-        distance2 = argc[1].km if isinstance(argc[1], Distance) else argc[1]
+    def __eq__(self, other: Distance | int | float) -> bool:
+        distance1 = self.km
+        distance2 = other
         return distance1 == distance2
 
-    def __le__(*argc) -> bool:
-        distance1 = argc[0].km if isinstance(argc[0], Distance) else argc[0]
-        distance2 = argc[1].km if isinstance(argc[1], Distance) else argc[1]
+    def __le__(self, other: Distance | int | float) -> bool:
+        distance1 = self.km
+        distance2 = other
         return distance1 <= distance2
 
-    def __ge__(*argc) -> bool:
-        distance1 = argc[0].km if isinstance(argc[0], Distance) else argc[0]
-        distance2 = argc[1].km if isinstance(argc[1], Distance) else argc[1]
+    def __ge__(self, other: Distance | int | float) -> bool:
+        distance1 = self.km
+        distance2 = other
         return distance1 >= distance2
